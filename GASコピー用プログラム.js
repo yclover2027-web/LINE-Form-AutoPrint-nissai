@@ -87,11 +87,12 @@ function sendLineReply(userId, userName, imageCount) {
     };
 
     // LINEのAPIエンドポイント（お届け先の住所みたいなもの）
-    UrlFetchApp.fetch('https://api.line.me/v2/bot/message/push', options);
+    var response = UrlFetchApp.fetch('https://api.line.me/v2/bot/message/push', options);
+    console.log('LINE Push Response:', response.getContentText());
 
   } catch (err) {
     // 返信に失敗しても、写真保存のメインの処理には影響を与えません
-    Logger.log('LINE返信に失敗しました: ' + err.toString());
+    console.error('LINE返信に失敗しました: ' + err.toString());
   }
 }
 

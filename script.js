@@ -331,9 +331,13 @@ uploadForm.addEventListener('submit', async function(event) {
                         text: `【処方せん送信完了】`
                     }
                 ]);
+                console.log('LINEメッセージ送信成功');
             } catch (msgErr) {
-                // sendMessagesが失敗してもメインの送信は完了させます
-                console.warn('LINEへの自動投稿に失敗しました:', msgErr);
+                console.error('LINEへの自動投稿に失敗しました:', msgErr);
+                // ユーザーに権限エラー等を気付かせるためにログを出します
+                if (msgErr.message && msgErr.message.includes('permission')) {
+                    console.error('権限が不足しています。LINE Developersで chat_message.write スコープを有効にしてください。');
+                }
             }
         }
 
