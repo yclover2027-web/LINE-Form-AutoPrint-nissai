@@ -20,15 +20,8 @@ function doPost(e) {
     var userName = data.userName || '患者様'; // 送信した人のLINE表示名（例：「鈴木 一郎」）
     var userId   = data.userId   || '';       // 送信した人のLINEユーザーID（返信用）
 
-    // 2. Googleドライブの保存先フォルダを探す（なければ作る）
-    var folderName = "処方せん受信トレイ";
-    var folders = DriveApp.getFoldersByName(folderName);
-    var targetFolder;
-    if (folders.hasNext()) {
-      targetFolder = folders.next();
-    } else {
-      targetFolder = DriveApp.createFolder(folderName);
-    }
+    // 2. Googleドライブの保存先フォルダを取得（にっさい店用 ID: 1XKAv_L2hOGBZXKR7Q2exjpZsUKniPoD3）
+    var targetFolder = DriveApp.getFolderById("1XKAv_L2hOGBZXKR7Q2exjpZsUKniPoD3");
 
     // 3. ファイル名に時間とお名前を入れます
     // 例：20260323_221500_鈴木一郎_1枚目.jpg

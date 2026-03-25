@@ -1,9 +1,8 @@
 @echo off
 pushd "%~dp0"
-powershell -ExecutionPolicy Bypass -File "è‡ªå‹•å°åˆ·ãƒ—ãƒ­ã‚°ãƒ©ãƒ .ps1"
+powershell -ExecutionPolicy Bypass -File "©“®ˆóüƒvƒƒOƒ‰ƒ€.ps1"
 if %errorlevel% neq 0 (
-    echo.
-    echo âŒ ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚
+    echo Error occurred.
     pause
 )
 popd
