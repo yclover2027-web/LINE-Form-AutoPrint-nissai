@@ -7,10 +7,10 @@
 // LIFFのID（LINEの管理画面で発行したもの）
 // LIFFとは「Line Front-end Framework」の略で、LINEの中でWebページを動かす仕組みです
 // LIFFのID（にっさい店用のLINE管理画面で発行したものに書き換えてください）
-const LIFF_ID = 'ここににっさい店用のLIFF_IDを入力';
+const LIFF_ID = '2009547264-CzxUyjc2';
 
 // GAS（にっさい店用のGoogle Apps Script）のURL
-const GAS_URL = 'ここににっさい店用のGAS_URLを入力';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxsFLZ885CI80sM9x7gKtF_u1CallrHTYwmghUI9UPRkUNHHJnPHvzccw-EWbDVUjma/exec';
 
 // ============================================================
 // 📦 グローバル変数（プログラム全体で使う情報を入れておく箱）
