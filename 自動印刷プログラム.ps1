@@ -6,15 +6,22 @@ Add-Type -AssemblyName System.Drawing
 # 💡【設定】使用するプリンター名（店舗の環境に合わせて設定済み）
 $printerName = "TASKalfa 408ci(J)"
 
-# 💡【設定】見張るフォルダのリスト
-$watchFolders = @(
-    "G:\.shortcut-targets-by-id\1XKAv_L2hOGBZXKR7Q2exjpZsUKniPoD3\処方せん受信トレイ　にっさい",
-    "G:\.shortcut-targets-by-id\1AWpZQwtF2VusSpJf9PF3OnurIdrHI6uj\Googleフォーム　にっさい店"
+# 💡【設定】見張るフォルダのリスト（ショートカットIDのパス）
+# フォルダ名が変更されても自動追従するようにIDで指定します
+$watchTargets = @(
+    "G:\.shortcut-targets-by-id\1XKAv_L2hOGBZXKR7Q2exjpZsUKniPoD3",
+    "G:\.shortcut-targets-by-id\1AWpZQwtF2VusSpJf9PF3OnurIdrHI6uj"
 )
 
 # 各フォルダの「印刷済み」準備
-foreach ($folder in $watchFolders) {
-    if (-not (Test-Path (Join-Path $folder "印刷済み"))) { New-Item -ItemType Directory -Path (Join-Path $folder "印刷済み") | Out-Null }
+foreach ($target in $watchTargets) {
+    if (Test-Path $target) {
+        $folder = Get-ChildItem -Path $target -Directory | Select-Object -First 1
+        if ($folder) {
+            $printedFolder = Join-Path $folder.FullName "印刷済み"
+            if (-not (Test-Path $printedFolder)) { New-Item -ItemType Directory -Path $printedFolder | Out-Null }
+        }
+    }
 }
 
 Write-Host "==============================================="
@@ -25,8 +32,18 @@ Write-Host ""
 Write-Host "👀 新しいファイルが Google ドライブ に届くのを見張っています..."
 
 while ($true) {
-    foreach ($watchFolder in $watchFolders) {
+    foreach ($target in $watchTargets) {
+        if (-not (Test-Path $target)) { continue }
+        
+        # 実際のフォルダ名（アンケートやGoogleフォーム等）を動的に取得
+        $folder = Get-ChildItem -Path $target -Directory | Select-Object -First 1
+        if (-not $folder) { continue }
+        
+        $watchFolder = $folder.FullName
         $printedFolder = Join-Path $watchFolder "印刷済み"
+        
+        # 印刷済みフォルダがない場合は作成
+        if (-not (Test-Path $printedFolder)) { New-Item -ItemType Directory -Path $printedFolder | Out-Null }
         
         # フォルダ内の JPG, PNG, PDFを探す
         $files = Get-ChildItem -Path $watchFolder -File | Where-Object { $_.Extension -match '\.(jpg|png|jpeg|pdf)$' }
