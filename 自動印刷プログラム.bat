@@ -1,5 +1,4 @@
 @echo off
-pushd "%~dp0"
-start /min powershell -WindowStyle Minimized -ExecutionPolicy Bypass -File "自動印刷プログラム.ps1"
-popd
+set "SCRIPT_DIR=%~dp0"
+start "" /min powershell -WindowStyle Minimized -ExecutionPolicy Bypass -Command "Set-Location -LiteralPath '%SCRIPT_DIR%'; & '.\自動印刷プログラム.ps1'"
 exit
