@@ -9,7 +9,7 @@ $printerName = "TASKalfa 408ci(J)"
 # 💡【設定】見張るフォルダのリスト
 $watchFolders = @(
     "G:\.shortcut-targets-by-id\1XKAv_L2hOGBZXKR7Q2exjpZsUKniPoD3\処方せん受信トレイ　にっさい",
-    "G:\.shortcut-targets-by-id\1AWpZQwtF2VusSpJf9PF3OnurIdrHI6uj\アンケートにっさい"
+    "G:\.shortcut-targets-by-id\1AWpZQwtF2VusSpJf9PF3OnurIdrHI6uj\Googleフォーム　にっさい店"
 )
 
 # 各フォルダの「印刷済み」準備
